@@ -144,33 +144,29 @@ public class MINDdroid extends Activity implements BTConnectable, TextToSpeech.O
      * Initialization of the motor commands for the different robot types.
      */
     private void setUpByType() {
-        switch (mRobotType) {
-            case R.id.robot_type_tribot:
-                motorLeft = BTCommunicator.MOTOR_B;
-                directionLeft = 1;
-                motorRight = BTCommunicator.MOTOR_C;
-                directionRight = 1;
-                motorAction = BTCommunicator.MOTOR_A;
-                directionAction = 1;
-                break;
-            case R.id.robot_type_robogator:
-                motorLeft = BTCommunicator.MOTOR_C;
-                directionLeft = -1;
-                motorRight = BTCommunicator.MOTOR_B;
-                directionRight = -1;
-                motorAction = BTCommunicator.MOTOR_A;
-                directionAction = 1;
-                break;
-            default:
-                // default
-                motorLeft = BTCommunicator.MOTOR_B;
-                directionLeft = 1;
-                motorRight = BTCommunicator.MOTOR_C;
-                directionRight = 1;
-                motorAction = BTCommunicator.MOTOR_A;
-                directionAction = 1;
-                break;
-        }
+        if (mRobotType == R.id.robot_type_tribot) {
+			motorLeft = BTCommunicator.MOTOR_B;
+			directionLeft = 1;
+			motorRight = BTCommunicator.MOTOR_C;
+			directionRight = 1;
+			motorAction = BTCommunicator.MOTOR_A;
+			directionAction = 1;
+		} else if (mRobotType == R.id.robot_type_robogator) {
+			motorLeft = BTCommunicator.MOTOR_C;
+			directionLeft = -1;
+			motorRight = BTCommunicator.MOTOR_B;
+			directionRight = -1;
+			motorAction = BTCommunicator.MOTOR_A;
+			directionAction = 1;
+		} else {
+			// default
+			motorLeft = BTCommunicator.MOTOR_B;
+			directionLeft = 1;
+			motorRight = BTCommunicator.MOTOR_C;
+			directionRight = 1;
+			motorAction = BTCommunicator.MOTOR_A;
+			directionAction = 1;
+		}
     }
 
     /**
@@ -273,36 +269,28 @@ public class MINDdroid extends Activity implements BTConnectable, TextToSpeech.O
             }
         }
 
-        // MOTOR ACTION: forth an back
-        switch (mRobotType) {
-            
-            case R.id.robot_type_robogator:
-                // Robogator: bite the user in any case ;-)
-                for (int bite=0; bite<3; bite++) {
-                    sendBTCmessage(bite*400, motorAction, 
-                        75*directionAction, 0);
-                    sendBTCmessage(bite*400+200, motorAction, 
-                        -75*directionAction, 0);
-                }    
-                sendBTCmessage(3*400, motorAction, 0, 0);
-                break;
-                
-            case R.id.robot_type_lejos:
-                // lejosMINDdroid: just send the message for button press
-                sendBTCmessage(BTCommunicator.NO_DELAY, 
-                    BTCommunicator.DO_ACTION, buttonMode, 0);
-                break;                    
-        
-            default:
-                // other robots: 180 degrees forth and back
-                int direction = (buttonMode == ACTION_BUTTON_SHORT ? 1 : -1);                
-                sendBTCmessage(BTCommunicator.NO_DELAY, motorAction, 
-                    75*direction*directionAction, 0);
-                sendBTCmessage(500, motorAction, 
-                    -75*direction*directionAction, 0);
-                sendBTCmessage(1000, motorAction, 0, 0);
-                break;
-        }
+        if (mRobotType == R.id.robot_type_robogator) {
+			// Robogator: bite the user in any case ;-)
+			for (int bite=0; bite<3; bite++) {
+			    sendBTCmessage(bite*400, motorAction, 
+			        75*directionAction, 0);
+			    sendBTCmessage(bite*400+200, motorAction, 
+			        -75*directionAction, 0);
+			}
+			sendBTCmessage(3*400, motorAction, 0, 0);
+		} else if (mRobotType == R.id.robot_type_lejos) {
+			// lejosMINDdroid: just send the message for button press
+			sendBTCmessage(BTCommunicator.NO_DELAY, 
+			    BTCommunicator.DO_ACTION, buttonMode, 0);
+		} else {
+			// other robots: 180 degrees forth and back
+			int direction = (buttonMode == ACTION_BUTTON_SHORT ? 1 : -1);
+			sendBTCmessage(BTCommunicator.NO_DELAY, motorAction, 
+			    75*direction*directionAction, 0);
+			sendBTCmessage(500, motorAction, 
+			    -75*direction*directionAction, 0);
+			sendBTCmessage(1000, motorAction, 0, 0);
+		}
     }
 
     /**

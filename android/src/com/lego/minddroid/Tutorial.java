@@ -97,12 +97,12 @@ class Tutorial {
         if (dialog.isShowing())
             dialog.dismiss();        
 		dialog.setContentView(layout);
-		switch (layout) {
-            case R.layout.tutorial_01:
-		    case R.layout.tutorial_03:
+		
+        if(layout == R.layout.tutorial_01);
+        else if(layout == R.layout.tutorial_03){
         	    myTextView = (TextView) dialog.findViewById(R.id.TutorialTextView);
         	    myTextView.setText(myActivity.getResources().getString(resource0));
-        	case R.layout.tutorial_04:
+        } else if(layout ==  R.layout.tutorial_04){
             	Button buttonOK = (Button) dialog.findViewById(R.id.nextButton);
             	buttonOK.setOnClickListener(new OnClickListener() {
             		public void onClick(View v)
@@ -111,9 +111,8 @@ class Tutorial {
                         setNewContent();
             		}
             	});
-            	break;
 
-            case R.layout.tutorial_02:                                                                       
+        } else if(layout == R.layout.tutorial_02){                                                                       
                 myImageView = (ImageView) dialog.findViewById(R.id.TutorialImageView);                               
                 myImageView.setImageResource(resource0);
             	myImageView.setOnClickListener(new OnClickListener() {
@@ -128,7 +127,6 @@ class Tutorial {
                 myTextView.setTextSize(20);
         	    myTextView.setText(myActivity.getResources().getString(resource1));    
         	          	              
-			    break;
         }
         dialog.show();        	            	    
 	}	
