@@ -243,7 +243,7 @@ public class MINDdroid extends Activity implements BTConnectable, TextToSpeech.O
      * Does something special depending on the robot-type.
      * @param buttonMode short, long or other press types.
      */
-    private void performActionCommand(int buttonMode) {
+    public void performActionCommand(int buttonMode) {
         
         if (mRobotType != R.id.robot_type_lejos) {
             if (buttonMode == ACTION_BUTTON_SHORT) {
