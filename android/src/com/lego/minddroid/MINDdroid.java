@@ -383,7 +383,7 @@ public class MINDdroid extends Activity implements BTConnectable, TextToSpeech.O
      * @param value1 first parameter
      * @param value2 second parameter
      */   
-    void sendBTCmessage(int delay, int message, int value1, int value2) {
+    public void sendBTCmessage(int delay, int message, int value1, int value2) {
         Bundle myBundle = new Bundle();
         myBundle.putInt("message", message);
         myBundle.putInt("value1", value1);
@@ -404,7 +404,7 @@ public class MINDdroid extends Activity implements BTConnectable, TextToSpeech.O
      * @param message the message type (as defined in BTCommucator)
      * @param String a String parameter
      */       
-    void sendBTCmessage(int delay, int message, String name) {
+    public void sendBTCmessage(int delay, int message, String name) {
         Bundle myBundle = new Bundle();
         myBundle.putInt("message", message);
         myBundle.putString("name", name);
