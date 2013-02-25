@@ -35,7 +35,7 @@ public class StartSound extends Thread {
 
 	@Override
 	public void run() {
-		if (myAudioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+		/*if (myAudioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
 			int ringVolume = myAudioManager.getStreamVolume(AudioManager.STREAM_RING);	
 			MediaPlayer myMediaPlayer = MediaPlayer.create(myContext, R.raw.startdroid);
 			myMediaPlayer.start();
@@ -45,6 +45,6 @@ public class StartSound extends Thread {
 			} catch (InterruptedException e) {
 			}
 			myMediaPlayer.stop();
-		}
+		}*/
 	}
 }
